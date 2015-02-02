@@ -13,9 +13,12 @@
 
 ## Schema overview
 
-![Schema](https://docs.google.com/drawings/d/1uLXAtV9wpD1Mm7FJQ_vEpFNdBarG8oXhdAloyo9VIkY/pub?w=924&h=355)
+There are 2 possible schemes: or you describe your system using StopTimes, which is the action of a vehicle stopping at a certain point in time at a certain stop_point and leaves again, or using Connections.
 
-In the stoptimes ontology, every stop a certain vehicle does or is schedules to do, gets a certain URI. A [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) has to have a [st:arrivalTime](http://semweb.mmlab.be/ns/stoptimes#arrivalTime) and/or a [st:departureTime](http://semweb.mmlab.be/ns/stoptimes#departureTime). If one of these is not set, it may indicate the vehicle is at a terminus or it is starting its service.
+![Schema](https://docs.google.com/drawings/d/1uLXAtV9wpD1Mm7FJQ_vEpFNdBarG8oXhdAloyo9VIkY/pub?w=924&h=355)
+![Schema2](https://docs.google.com/drawings/d/14K12_DtLdF5tyFHYGsCAHMYQqRacWmRr_vx59RZqS78/pub?w=940&h=491)
+
+A [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) has to have a [st:arrivalTime](http://semweb.mmlab.be/ns/stoptimes#arrivalTime) and/or a [st:departureTime](http://semweb.mmlab.be/ns/stoptimes#departureTime). If one of these is not set, it may indicate the vehicle is at a terminus or it is starting its service.
 
 The [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) also refers through [gtfs:stop](http://vocab.gtfs.org/terms#stop) to a [gtfs:Stop](http://vocab.gtfs.org/terms#Stop), pointing to the exact location where passengers can disembark and embark. Mind that the [gtfs:stop](http://vocab.gtfs.org/terms#stop) can change over time for the same [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime). For example, one [gtfs:Stop](http://vocab.gtfs.org/terms#Stop) can be "platform A of Paris Gare du Nord", but due to the late announcement of the exact platform at Paris Gare du Nord, first the [gtfs:Station](http://vocab.gtfs.org/terms#Station) "Paris Gare du Nord" can be mentioned before the precise [gtfs:Stop](http://vocab.gtfs.org/terms#Stop) is mentioned.
 
