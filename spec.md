@@ -40,21 +40,9 @@ Use a JSON-LD context and mark up your JSON:
     "st": "http://semweb.mmlab.be/ns/stoptimes#",
     "arrivaltime" : "st:arrivalTime",
     "departuretime" : "st:departureTime",
-    "stop" : {
-      "@id" : "gtfs:stop",
-      "@type" : "@id"
-    },
-    "nextstoptime" : {
-      "@id" : "st:nextStopTime",
-      "@type" : "@id"
-    },
     "headsign" : "gtfs:headSign",
     "route" : {
       "@id" : "gtfs:route",
-      "@type" : "@id"
-    },
-    "trip" : {
-      "@id" : "gtfs:trip",
       "@type" : "@id"
     },
     "accessibility" : {
@@ -64,24 +52,20 @@ Use a JSON-LD context and mark up your JSON:
     "name" : "http://xmlns.com/foaf/0.1/name"
   },
   "@graph" : {
-    "@id" : "http://example.com/stoptimes/1",
-    "@type" : "st:StopTime",
-    "arrivaltime" : "2014-11-03T19:14:00+01:00",
+    "@id" : "http://example.com/connections/1",
+    "@type" : "st:Connection",
+    "arrivaltime" : "2014-11-03T19:19:00+01:00",
     "departuretime" : "2014-11-03T19:16:00+01:00",
-    "stop" : {
+    "st:departureStop" : {
       "@id" : "http://irail.be/stations/NMBS/008896412",
       "@type" : "gtfs:Station",
       "name" : "Comines",
       "accessibility" : "gtfs:WheelchairAccessible"
     },
-    "nextstoptime" : "http://example.com/stoptimes/2",
+    "st:arrivalStop" : "http://irail.be/stations/NMBS/...",
     "headsign" : "Poperinge",
-    "wheelchairaccessible" : "gtfs:WheelchairAccessible",
+    "accessibility" : "gtfs:WheelchairAccessible",
     "route" : "http://example.com/routes/1"
   }
 }
 ```
-
-## Archives
-
-For archiving purposes, which may be interesting for comparing stop time announcements over time, we introduce the [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) as a [prov:Entity](http://www.w3.org/ns/prov#Entity). When used in combination with Prov, each [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) becomes an observation or prediction of a stoptime as done by a certain Activity at a certain moment (e.g., scraping of a website every night or calculated through a time schedule).
