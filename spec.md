@@ -13,34 +13,35 @@
 
 ## Schema overview
 
-There are 2 possible schemes: or you describe your system using StopTimes, which is the action of a vehicle stopping at a certain point in time at a certain stop_point and leaves again, or using Connections.
+When we want to identify the action where a vehicle stops at a certain moment on a certain place, and departs again, we can give that thing a type [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime). When we only want to identify the action of arriving at a certain stop, or departing at a certain stop, we also make available the types [st:Arrival](http://semweb.mmlab.be/ns/stoptimes#Arrival) and [st:Departure](http://semweb.mmlab.be/ns/stoptimes#Departure).
 
-![Schema](https://docs.google.com/drawings/d/1uLXAtV9wpD1Mm7FJQ_vEpFNdBarG8oXhdAloyo9VIkY/pub?w=924&h=355)
-![Schema2](https://docs.google.com/drawings/d/14K12_DtLdF5tyFHYGsCAHMYQqRacWmRr_vx59RZqS78/pub?w=940&h=491)
-
-A [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) has to have a [st:arrivalTime](http://semweb.mmlab.be/ns/stoptimes#arrivalTime) and/or a [st:departureTime](http://semweb.mmlab.be/ns/stoptimes#departureTime). If one of these is not set, it may indicate the vehicle is at a terminus or it is starting its service.
+A [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) has to have a [gtfs:arrivalTime](http://vocab.gtfs.org/terms#arrivalTime), [dct:date](http://purl.org/dc/terms/date) and/or a [gtfs:departureTime](http://vocab.gtfs.org/terms#departureTime). If an arrivalTime or a departureTime is not set, it may indicate the vehicle is at a terminus or it is starting its service.
 
 The [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) also refers through [gtfs:stop](http://vocab.gtfs.org/terms#stop) to a [gtfs:Stop](http://vocab.gtfs.org/terms#Stop), pointing to the exact location where passengers can disembark and embark. Mind that the [gtfs:stop](http://vocab.gtfs.org/terms#stop) can change over time for the same [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime). For example, one [gtfs:Stop](http://vocab.gtfs.org/terms#Stop) can be "platform A of Paris Gare du Nord", but due to the late announcement of the exact platform at Paris Gare du Nord, first the [gtfs:Station](http://vocab.gtfs.org/terms#Station) "Paris Gare du Nord" can be mentioned before the precise [gtfs:Stop](http://vocab.gtfs.org/terms#Stop) is mentioned.
 
 The [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) may refer, using the predicate [st:nextStopTime](http://semweb.mmlab.be/ns/stoptimes#nextStopTime), to the next [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime). Mind that this can also change over time, e.g., for an extra stop being introduced on the current [gtfs:Trip](http://vocab.gtfs.org/terms#Trip).
 
-[gtfs:headSign](http://vocab.gtfs.org/terms#headSign) is a predicate from the GTFS ontology and gives a label to the current trip which can be shown to the end-user to refer to the right vehicle at that station.
+An [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) is very similar to a [gtfs:StopTime](http://vocab.gtfs.org/terms#StopTime). While [gtfs:StopTime](http://vocab.gtfs.org/terms#StopTime) defines a collection of recurring stop times, [st:StopTime](http://semweb.mmlab.be/ns/stoptimes#StopTime) only identifies one specific stop time.
 
-[gtfs:route](http://vocab.gtfs.org/terms#route) is a predicate to link a stoptime with a certain Route. Also [gtfs:trip](http://vocab.gtfs.org/terms#trip) may be used.
+Other GTFS terms that are interesting to be used include, but are not limited to, [gtfs:route](http://vocab.gtfs.org/terms#route) or [gtfs:trip](http://vocab.gtfs.org/terms#trip), [gtfs:headsign](http://vocab.gtfs.org/terms#headsign). More about gtfs can be found at https://github.com/OpenTransport/linked-gtfs/blob/master/spec.md
 
-# Usage
+Another interesting vocabulary to use is the [Linked Connections vocabulary (lc:)](http://github.com/linkedconnections/vocabulary).
 
-## Departure or Arrival indicators
+# Example usage
+
+## Stoptime list
 
 Use a JSON-LD context and mark up your JSON:
 ```json
 {
   "@context" : {
     "gtfs" : "http://vocab.gtfs.org/terms#",
+    "dct" : "http://purl.org/dc/terms/",
     "st": "http://semweb.mmlab.be/ns/stoptimes#",
-    "arrivaltime" : "st:arrivalTime",
-    "departuretime" : "st:departureTime",
-    "headsign" : "gtfs:headSign",
+    "arrivaltime" : "gtfs:arrivalTime",
+    "departuretime" : "gtfs:departureTime",
+    "date" : "dct:date",
+    "headsign" : "gtfs:headsign",
     "route" : {
       "@id" : "gtfs:route",
       "@type" : "@id"
@@ -54,8 +55,9 @@ Use a JSON-LD context and mark up your JSON:
   "@graph" : {
     "@id" : "http://example.com/connections/1",
     "@type" : "st:Connection",
-    "arrivaltime" : "2014-11-03T19:19:00+01:00",
-    "departuretime" : "2014-11-03T19:16:00+01:00",
+    "arrivaltime" : "19:19:00",
+    "departuretime" : "19:16:00",
+    "date" : "2014-11-03",
     "st:departureStop" : {
       "@id" : "http://irail.be/stations/NMBS/008896412",
       "@type" : "gtfs:Station",
