@@ -42,6 +42,7 @@ Use a JSON-LD context and mark up your JSON:
     "departuretime" : "gtfs:departureTime",
     "date" : "dct:date",
     "headsign" : "gtfs:headsign",
+    "stop" : "gtfs:stop",
     "route" : {
       "@id" : "gtfs:route",
       "@type" : "@id"
@@ -53,18 +54,17 @@ Use a JSON-LD context and mark up your JSON:
     "name" : "http://xmlns.com/foaf/0.1/name"
   },
   "@graph" : {
-    "@id" : "http://example.com/connections/1",
-    "@type" : "st:Connection",
+    "@id" : "http://example.com/stop_times/1",
+    "@type" : "st:StopTime",
     "arrivaltime" : "19:19:00",
     "departuretime" : "19:16:00",
     "date" : "2014-11-03",
-    "st:departureStop" : {
+    "stop" : {
       "@id" : "http://irail.be/stations/NMBS/008896412",
       "@type" : "gtfs:Station",
       "name" : "Comines",
       "accessibility" : "gtfs:WheelchairAccessible"
     },
-    "st:arrivalStop" : "http://irail.be/stations/NMBS/...",
     "headsign" : "Poperinge",
     "accessibility" : "gtfs:WheelchairAccessible",
     "route" : "http://example.com/routes/1"
