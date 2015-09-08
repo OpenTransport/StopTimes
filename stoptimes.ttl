@@ -33,11 +33,11 @@ st:StopTime a rdfs:Class ;
 
 st:Arrival a rdfs:Class ;
             rdfs:label "Arrival"@en ;
-            rdfs:comment "A location and a time where a vehicle stops for the purpose of loading and/or unloading people or things"@en .
+            rdfs:comment "A location and a time where a vehicle stops for the purpose of unloading people or things"@en .
 
 st:Departure a rdfs:Class ;
             rdfs:label "Arrival"@en ;
-            rdfs:comment "A location and a departure time where a vehicle departs for the purpose of loading and/or unloading people or things"@en .
+            rdfs:comment "A location and a departure time where a vehicle departs where people or things can be loaded"@en .
 
 st:nextStopTime a rdf:Property ;
                 rdfs:label "Next Stop Time"@en ;
