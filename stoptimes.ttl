@@ -54,3 +54,8 @@ st:departureDelay a rdf:Property ;
                   rdfs:label "Departure Delay"@en ;
                   rdfs:comment "The time in seconds in which the st:departureTime differs from the scheduled departure time"@en ;
                   rdfs:range xsd:duration .
+                  
+st:avgStopTimes a rdf:Property ;
+                rdfs:label "Average Stop Times"@en ;
+                rdfs:comment "The average st:StopTimes per day"@en ;
+                rdfs:range xsd:double .
